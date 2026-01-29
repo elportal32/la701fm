@@ -169,17 +169,6 @@
             display: block;
         }
 
-        .info-box {
-            background: rgba(204, 0, 255, 0.1);
-            border: 1px solid #cc00ff;
-            border-radius: 6px;
-            padding: 12px;
-            margin-top: 20px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.5;
-        }
-
         @media (max-width: 768px) {
             .login-container {
                 margin: 20px;
@@ -207,11 +196,6 @@
 
             .login-btn {
                 font-size: 14px;
-                padding: 10px;
-            }
-
-            .info-box {
-                font-size: 11px;
                 padding: 10px;
             }
         }
@@ -267,13 +251,6 @@
                 padding: 10px;
                 margin-top: 10px;
             }
-
-            .info-box {
-                font-size: 10px;
-                padding: 8px;
-                margin-top: 15px;
-                line-height: 1.4;
-            }
         }
     </style>
 </head>
@@ -310,17 +287,35 @@
 
             <button type="submit" class="login-btn" id="loginBtn">🔓 Ingresar</button>
             <div id="status" class="status"></div>
-
-            <div class="info-box">
-                <strong>Credenciales:</strong><br>
-                Usuario: <code>LA701FM</code><br>
-                Contraseña: <code>LA701FM</code>
-            </div>
         </form>
     </div>
 
-    <script src="auth.js"></script>
     <script>
+        // Verificar autenticación al cargar
+        function checkAuthOnLoad() {
+            const auth = localStorage.getItem('adminAuth');
+            if (auth) {
+                try {
+                    const authData = JSON.parse(auth);
+                    const sessionAge = Date.now() - authData.timestamp;
+                    const maxSessionTime = 24 * 60 * 60 * 1000;
+                    
+                    if (sessionAge <= maxSessionTime) {
+                        window.location.href = 'admin.html';
+                        return;
+                    } else {
+                        localStorage.removeItem('adminAuth');
+                    }
+                } catch (error) {
+                    localStorage.removeItem('adminAuth');
+                }
+            }
+        }
+
+        // Ejecutar verificación inmediatamente
+        checkAuthOnLoad();
+
+        // Manejar login
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -334,8 +329,8 @@
             loginBtn.disabled = true;
 
             try {
-                // Simular verificación (en producción, esto iría a un backend)
-                await new Promise(resolve => setTimeout(resolve, 500));
+                // Simular verificación
+                await new Promise(resolve => setTimeout(resolve, 300));
 
                 // Credenciales
                 if (username === 'LA701FM' && password === 'LA701FM') {
@@ -353,7 +348,7 @@
                     // Redirigir al panel
                     setTimeout(() => {
                         window.location.href = 'admin.html';
-                    }, 300);
+                    }, 200);
                 } else {
                     throw new Error('Usuario o contraseña incorrectos');
                 }
@@ -363,12 +358,6 @@
                 loginBtn.disabled = false;
             }
         });
-
-        // Si ya está autenticado, redirigir al panel
-        const auth = localStorage.getItem('adminAuth');
-        if (auth) {
-            window.location.href = 'admin.html';
-        }
     </script>
 </body>
 </html>
