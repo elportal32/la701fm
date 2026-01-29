@@ -1,0 +1,97 @@
+{
+  "name": "la701fm",
+  "short_name": "la701fm",
+  "description": "la701fm - Tu Radio",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#000000",
+  "theme_color": "#cc00ff",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["music"],
+  "screenshots": [
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Reproductor",
+      "short_name": "Reproductor",
+      "description": "Abre el reproductor de La 70.1 FM",
+      "url": "/?action=player",
+      "icons": [
+        {
+          "src": "https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#cc00ff">
+    <meta name="description" content="la701fm">
+    <title>la701fm</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png">
+    <link href="https://extassisnetwork.com/player/Luna2/luna.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="config.js"></script>
+    
+    <!-- OneSignal -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "f6796904-39d7-4aa6-be42-22192ea548a8",
+          allowLocalhostAsSecureOrigin: true,
+        });
+      });
+    </script>
+</head>
+<body>
+    <!-- Menú Hamburguesa -->
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="sidebar" id="sidebar">
+        <div class="menu-header">
+            <img src="https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png" alt="la701fm" class="menu-logo">
+            <h2>la701fm</h2>
+        </div>
+        <ul class="menu-list">
+            <li><a href="#" onclick="scrollToPlayer()">🎙️ Reproductor</a></li>
+            <li><a href="#" onclick="openSocialMedia()">👍 Redes Sociales</a></li>
+            <li><a href="https://wa.me/5493834996581" target="_blank">📱 WhatsApp</a></li>
+        </ul>
+    </nav>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Contenedor Principal -->
+    <div class="container">
+        <!-- Player -->
+        <div class="player-section">
+            <style>
+                body {
+                    margin: 0;
+                    padding: 0;
+                    background-image: url("https://i.ibb.co/Q7ZKPGjB/Photoroom-20260128-163810.png");
+                    background-size: cover;
+                    background-position: center;
+                    background-attachment: fixed;
+                    background-repeat: no-repeat;
+                    background-color: #000;
+                }
+            </style>
+            <div class="extassis" id="extassis" style="width:100%; height:100vh; border: none;" 
+                data-userinterface="big" 
+                data-backgroundcolor="rgba(0, 0, 0, 0.45)" 
+                data-fontcolor="#ffffff" 
+                data-hightlightcolor="#ffffff" 
+                data-fontname="Montserrat" 
+                data-googlefont="Montserrat" 
+                data-fontratio="0.4" 
+                data-radioname="la701fm" 
+                data-scroll="true" 
+                data-coverimage="https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png" 
+                data-onlycoverimage="false" 
+                data-coverstyle="animated" 
+                data-usevisualizer="real" 
+                data-visualizertype="4" 
+                data-metadatatechnic="nothing" 
+                data-corsproxy="" 
+                data-usestreamcorsproxy="false" 
+                data-streamurl="https://streaming01.shockmedia.com.ar:8530/stream" 
+                data-streamtype="other" 
+                data-shoutcastpath="" 
+                data-shoutcastid="" 
+                data-metadatainterval="0" 
+                data-volume="100" 
+                data-autoplay="true" 
+                data-displayliveicon="true" 
+                data-debug="false" 
+                data-multicolorvisualizer="true" 
+                data-color1="#FF1493" 
+                data-color2="#00FF00" 
+                data-color3="#00FFFF" 
+                data-color4="#FFD700" 
+                data-visualizeropacity="0.5" 
+                data-displayvisualizericon="true">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Redes Sociales -->
+    <div class="modal" id="socialModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSocialModal()">&times;</span>
+            <h2>Redes Sociales</h2>
+            <div class="social-grid">
+                <a href="https://www.facebook.com/share/1biPswYxaq/" target="_blank" class="social-btn facebook">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <span class="social-name">Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/miguelmarcaregistrada7?igsh=NTc4MTIwNjQ2YQ==" target="_blank" class="social-btn instagram">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.117.6c-.79.263-1.473.557-2.115 1.194-.657.646-.945 1.35-1.206 2.115-.266.788-.471 1.666-.53 2.946C.032 8.333.017 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.53 2.913.263.788.557 1.473 1.198 2.117.645.659 1.33.957 2.115 1.204.788.266 1.666.471 2.946.53C8.333 23.968 8.74 23.983 12 23.983s3.667-.015 4.947-.072c1.277-.06 2.148-.261 2.913-.53.788-.263 1.473-.557 2.117-1.198.659-.645.957-1.33 1.204-2.115.266-.788.471-1.666.53-2.946.058-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.261-2.148-.53-2.913-.263-.788-.557-1.473-1.198-2.117-.645-.659-1.33-.957-2.115-1.204-.788-.266-1.666-.471-2.946-.53C15.667.032 15.26.017 12 0zm0 2.16c3.203 0 3.585.009 4.849.070 1.171.054 1.805.244 2.227.408.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.354 1.057.408 2.227.061 1.264.07 1.646.07 4.849s-.009 3.585-.07 4.849c-.054 1.171-.244 1.805-.408 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.057.354-2.227.408-1.264.061-1.646.07-4.849.07s-3.585-.009-4.849-.07c-1.171-.054-1.805-.244-2.227-.408-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.819-.896-1.381-.164-.422-.354-1.057-.408-2.227-.061-1.264-.07-1.646-.07-4.849s.009-3.585.07-4.849c.054-1.171.244-1.805.408-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.354 2.227-.408 1.264-.061 1.646-.07 4.849-.07z"/>
+                        <circle cx="12" cy="12" r="3.846"/>
+                        <circle cx="18.461" cy="5.538" r=".923"/>
+                    </svg>
+                    <span class="social-name">Instagram</span>
+                </a>
+                <a href="https://www.tiktok.com/@miguel.marcaregistrada.7?_r=1&_t=ZS-93SQuHuEetpContact" target="_blank" class="social-btn tiktok">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.498 3.094c1.356 0 2.463-1.1 2.463-2.456s-1.107-2.456-2.463-2.456c-1.356 0-2.456 1.1-2.456 2.456s1.1 2.456 2.456 2.456zM15.5 12.75c0 .981.794 1.775 1.775 1.775s1.775-.794 1.775-1.775-.794-1.775-1.775-1.775-1.775.794-1.775 1.775zM13.05 5.5c.981 0 1.775-.794 1.775-1.775S14.031 1.95 13.05 1.95s-1.775.794-1.775 1.775.794 1.775 1.775 1.775zm6.35 6.5c0 .981.794 1.775 1.775 1.775s1.775-.794 1.775-1.775-.794-1.775-1.775-1.775-1.775.794-1.775 1.775z"/>
+                        <path d="M9.5 19c-2.481 0-4.5-2.019-4.5-4.5s2.019-4.5 4.5-4.5 4.5 2.019 4.5 4.5-2.019 4.5-4.5 4.5zm0-7c-1.381 0-2.5 1.119-2.5 2.5s1.119 2.5 2.5 2.5 2.5-1.119 2.5-2.5-1.119-2.5-2.5-2.5z"/>
+                    </svg>
+                    <span class="social-name">TikTok</span>
+                </a>
+                <a href="REEMPLAZA_CON_URL_WEB" target="_blank" class="social-btn web">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm3.5-10c0 1.933-1.567 3.5-3.5 3.5S8.5 13.933 8.5 12 10.067 8.5 12 8.5s3.5 1.567 3.5 3.5zm-2 0c0-1.381-1.119-2.5-2.5-2.5s-2.5 1.119-2.5 2.5 1.119 2.5 2.5 2.5 2.5-1.119 2.5-2.5z"/>
+                        <path d="M12 4c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 14c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z"/>
+                    </svg>
+                    <span class="social-name">Web</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://extassisnetwork.com/player/Luna2/luna.js"></script>
+    <script src="https://extassisnetwork.com/player/Luna2/luna2.js"></script>
+    <script src="https://extassisnetwork.com/player/Luna2/luna3.js"></script>
+    <script>
+        $radioURL = "https://streaming01.shockmedia.com.ar:8530/stream";
+        var animationactive = 0;
+        var songMem = new Array();
+        var ShowAlbumCover = true;
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
