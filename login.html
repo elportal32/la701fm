@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Panel Admin la701fm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px solid #cc00ff;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(204, 0, 255, 0.3);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 2px solid #cc00ff;
+        }
+
+        .login-header h1 {
+            color: #cc00ff;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .login-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #cc00ff;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cc00ff;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 10px rgba(204, 0, 255, 0.5);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #cc00ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: #9900cc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(204, 0, 255, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+            font-size: 14px;
+        }
+
+        .status.error {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            display: block;
+        }
+
+        .status.loading {
+            background: rgba(204, 0, 255, 0.2);
+            color: #cc00ff;
+            border: 2px solid #cc00ff;
+            display: block;
+        }
+
+        .info-box {
+            background: rgba(204, 0, 255, 0.1);
+            border: 1px solid #cc00ff;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+
+            .login-header h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png" alt="la701fm">
+            <h1>Panel Admin</h1>
+            <p>la701fm</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    placeholder="Ingresa tu usuario" 
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Ingresa tu contraseña" 
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">🔓 Ingresar</button>
+            <div id="status" class="status"></div>
+
+            <div class="info-box">
+                <strong>Credenciales de prueba:</strong><br>
+                Usuario: <code>admin</code><br>
+                Contraseña: <code>la701fm</code>
+            </div>
+        </form>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const status = document.getElementById('status');
+            const loginBtn = document.getElementById('loginBtn');
+
+            status.className = 'status loading';
+            status.textContent = '⏳ Verificando credenciales...';
+            loginBtn.disabled = true;
+
+            try {
+                // Simular verificación (en producción, esto iría a un backend)
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Credenciales de prueba
+                if (username === 'admin' && password === 'la701fm') {
+                    // Guardar autenticación
+                    const authData = {
+                        username: username,
+                        timestamp: Date.now(),
+                        token: btoa(username + ':' + Date.now())
+                    };
+                    localStorage.setItem('adminAuth', JSON.stringify(authData));
+                    
+                    status.className = 'status';
+                    status.textContent = '';
+                    
+                    // Redirigir al panel
+                    setTimeout(() => {
+                        window.location.href = 'admin.html';
+                    }, 300);
+                } else {
+                    throw new Error('Usuario o contraseña incorrectos');
+                }
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = '❌ ' + error.message;
+                loginBtn.disabled = false;
+            }
+        });
+
+        // Si ya está autenticado, redirigir al panel
+        const auth = localStorage.getItem('adminAuth');
+        if (auth) {
+            window.location.href = 'admin.html';
+        }
+    </script>
+</body>
+</html>

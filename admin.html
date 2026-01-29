@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - la701fm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 400px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-right: 2px solid #cc00ff;
+            overflow-y: auto;
+            color: white;
+        }
+
+        .sidebar h1 {
+            color: #cc00ff;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cc00ff;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cc00ff;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #cc00ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #9900cc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(204, 0, 255, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+        }
+
+        .status.success {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            display: block;
+        }
+
+        .status.error {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            display: block;
+        }
+
+        .status.loading {
+            background: rgba(204, 0, 255, 0.2);
+            color: #cc00ff;
+            border: 2px solid #cc00ff;
+            display: block;
+        }
+
+        .onesignal-container {
+            flex: 1;
+            background: white;
+            overflow: hidden;
+        }
+
+        .onesignal-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .logout-btn {
+            background: #990000;
+            margin-top: 20px;
+        }
+
+        .logout-btn:hover {
+            background: #660000;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid #cc00ff;
+                max-height: 50vh;
+            }
+
+            .onesignal-container {
+                max-height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>📢 Panel Admin</h1>
+            <h2 style="font-size: 16px; color: white; margin-bottom: 20px;">Enviar Notificación</h2>
+
+            <form id="notificationForm">
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        placeholder="Ej: ¡Nuevo programa!" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea 
+                        id="message" 
+                        placeholder="Escribe el mensaje que recibirán los usuarios..." 
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="btn">📤 Enviar Notificación</button>
+                <div id="status" class="status"></div>
+
+                <button type="button" class="btn logout-btn" onclick="logout()">🚪 Cerrar Sesión</button>
+            </form>
+        </div>
+
+        <div class="onesignal-container">
+            <iframe src="https://app.onesignal.com/apps/f6796904-39d7-4aa6-be42-22192ea548a8/messages" 
+                    title="OneSignal Dashboard">
+            </iframe>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Enviar notificación
+        document.getElementById('notificationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const message = document.getElementById('message').value;
+            const status = document.getElementById('status');
+
+            status.className = 'status loading';
+            status.textContent = '⏳ Enviando notificación...';
+
+            try {
+                // Enviar a través de OneSignal API
+                // NOTA: En producción, esto debería ir a través de un backend seguro
+                // Para ahora, usamos el endpoint de OneSignal directamente
+                const response = await fetch('https://onesignal.com/api/v1/notifications', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'Authorization': 'Basic ZjY3OTY5MDQtMzlkNy00YWE2LWJlNDItMjIxOTJlYTU0OGE4'
+                    },
+                    body: JSON.stringify({
+                        app_id: 'f6796904-39d7-4aa6-be42-22192ea548a8',
+                        included_segments: ['All'],
+                        headings: { es: title },
+                        contents: { es: message },
+                        big_picture: 'https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png',
+                        large_icon: 'https://i.ibb.co/1fFmt954/Photoroom-20260128-163712.png'
+                    })
+                });
+
+                if (response.ok) {
+                    status.className = 'status success';
+                    status.textContent = '✅ ¡Notificación enviada exitosamente!';
+                    document.getElementById('title').value = '';
+                    document.getElementById('message').value = '';
+                    setTimeout(() => {
+                        status.className = 'status';
+                    }, 5000);
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.errors ? errorData.errors[0] : 'Error al enviar');
+                }
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = '❌ Error al enviar: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
