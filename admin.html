@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
     <title>Panel Admin - la701fm</title>
     <style>
         * {
@@ -22,6 +22,7 @@
             display: flex;
             width: 100%;
             height: 100vh;
+            gap: 0;
         }
 
         .sidebar {
@@ -31,6 +32,24 @@
             border-right: 2px solid #cc00ff;
             overflow-y: auto;
             color: white;
+            flex-shrink: 0;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(204, 0, 255, 0.1);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #cc00ff;
+            border-radius: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #9900cc;
         }
 
         .sidebar h1 {
@@ -119,6 +138,29 @@
             color: rgba(255, 255, 255, 0.5);
         }
 
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 10px rgba(204, 0, 255, 0.5);
+        }
+
+        /* Mejorar touch en móvil */
+        @media (hover: none) and (pointer: coarse) {
+            .form-group input,
+            .form-group textarea,
+            .btn {
+                font-size: 16px;
+                -webkit-appearance: none;
+                appearance: none;
+            }
+
+            .btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
         .form-group textarea {
             resize: vertical;
             min-height: 100px;
@@ -181,6 +223,7 @@
             flex: 1;
             background: white;
             overflow: hidden;
+            min-width: 0;
         }
 
         .onesignal-container iframe {
@@ -207,11 +250,232 @@
                 width: 100%;
                 border-right: none;
                 border-bottom: 2px solid #cc00ff;
-                max-height: 50vh;
+                max-height: 60vh;
+                overflow-y: auto;
             }
 
             .onesignal-container {
-                max-height: 50vh;
+                max-height: 40vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                padding: 20px;
+                max-height: 55vh;
+            }
+
+            .sidebar h1 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .sidebar-section h2 {
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                font-size: 13px;
+                padding: 10px;
+            }
+
+            .form-group textarea {
+                min-height: 80px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .info-card {
+                padding: 10px;
+                font-size: 12px;
+                margin-bottom: 8px;
+            }
+
+            .info-card strong {
+                margin-bottom: 3px;
+            }
+
+            .info-card code {
+                font-size: 11px;
+            }
+
+            .onesignal-container {
+                max-height: 45vh;
+            }
+
+            .logout-btn {
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                max-height: none;
+                padding: 15px;
+                border-bottom: 2px solid #cc00ff;
+                overflow-y: visible;
+            }
+
+            .sidebar h1 {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            .sidebar-section {
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+            }
+
+            .sidebar-section h2 {
+                font-size: 11px;
+                margin-bottom: 10px;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+            }
+
+            .form-group label {
+                font-size: 12px;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                font-size: 12px;
+                padding: 8px;
+                border-radius: 4px;
+            }
+
+            .form-group textarea {
+                min-height: 70px;
+                resize: vertical;
+            }
+
+            .btn {
+                font-size: 12px;
+                padding: 8px;
+                margin-top: 8px;
+                border-radius: 4px;
+            }
+
+            .status {
+                font-size: 11px;
+                padding: 10px;
+                margin-top: 10px;
+                border-radius: 4px;
+            }
+
+            .info-card {
+                background: rgba(204, 0, 255, 0.1);
+                border: 1px solid #cc00ff;
+                border-radius: 4px;
+                padding: 8px;
+                margin-bottom: 8px;
+                font-size: 11px;
+                line-height: 1.4;
+            }
+
+            .info-card strong {
+                color: #cc00ff;
+                display: block;
+                margin-bottom: 3px;
+                font-size: 11px;
+            }
+
+            .info-card code {
+                background: rgba(0, 0, 0, 0.5);
+                padding: 2px 4px;
+                border-radius: 2px;
+                font-family: 'Courier New', monospace;
+                color: #00ff00;
+                font-size: 10px;
+                word-break: break-all;
+            }
+
+            .info-card a {
+                color: #00ffff;
+                text-decoration: none;
+                word-break: break-all;
+                font-size: 10px;
+            }
+
+            .onesignal-container {
+                width: 100%;
+                height: 50vh;
+                min-height: 400px;
+            }
+
+            .onesignal-container iframe {
+                width: 100%;
+                height: 100%;
+            }
+
+            .logout-btn {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .sidebar {
+                padding: 12px;
+            }
+
+            .sidebar h1 {
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+
+            .sidebar-section {
+                margin-bottom: 15px;
+                padding-bottom: 12px;
+            }
+
+            .sidebar-section h2 {
+                font-size: 10px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                font-size: 11px;
+                padding: 7px;
+            }
+
+            .btn {
+                font-size: 11px;
+                padding: 7px;
+            }
+
+            .info-card {
+                padding: 7px;
+                font-size: 10px;
+            }
+
+            .info-card code {
+                font-size: 9px;
             }
         }
     </style>

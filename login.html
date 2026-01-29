@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
     <title>Login - Panel Admin la701fm</title>
     <style>
         * {
@@ -18,6 +18,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 10px;
         }
 
         .login-container {
@@ -28,6 +29,18 @@
             width: 100%;
             max-width: 400px;
             box-shadow: 0 10px 40px rgba(204, 0, 255, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .login-header {
@@ -86,6 +99,21 @@
 
         .form-group input::placeholder {
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Mejorar touch en móvil */
+        @media (hover: none) and (pointer: coarse) {
+            .form-group input,
+            .login-btn {
+                font-size: 16px;
+                -webkit-appearance: none;
+                appearance: none;
+            }
+
+            .login-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
         }
 
         .login-btn {
@@ -152,14 +180,99 @@
             line-height: 1.5;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .login-container {
                 margin: 20px;
                 padding: 30px 20px;
+                max-width: 90%;
+            }
+
+            .login-header img {
+                width: 70px;
+                height: 70px;
             }
 
             .login-header h1 {
                 font-size: 20px;
+            }
+
+            .login-header p {
+                font-size: 12px;
+            }
+
+            .form-group input,
+            .form-group label {
+                font-size: 14px;
+            }
+
+            .login-btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .info-box {
+                font-size: 11px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 15px;
+                padding: 20px 15px;
+                border-radius: 8px;
+            }
+
+            .login-header {
+                margin-bottom: 20px;
+            }
+
+            .login-header img {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 10px;
+            }
+
+            .login-header h1 {
+                font-size: 18px;
+                margin-bottom: 3px;
+            }
+
+            .login-header p {
+                font-size: 11px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+
+            .form-group input {
+                font-size: 13px;
+                padding: 10px;
+            }
+
+            .login-btn {
+                font-size: 13px;
+                padding: 10px;
+                margin-top: 8px;
+            }
+
+            .status {
+                font-size: 12px;
+                padding: 10px;
+                margin-top: 10px;
+            }
+
+            .info-box {
+                font-size: 10px;
+                padding: 8px;
+                margin-top: 15px;
+                line-height: 1.4;
             }
         }
     </style>
