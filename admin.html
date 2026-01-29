@@ -39,6 +39,58 @@
             font-size: 24px;
         }
 
+        .sidebar-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(204, 0, 255, 0.3);
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-section h2 {
+            color: #cc00ff;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-card {
+            background: rgba(204, 0, 255, 0.1);
+            border: 1px solid #cc00ff;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .info-card strong {
+            color: #cc00ff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-card code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+        }
+
+        .info-card a {
+            color: #00ffff;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -168,34 +220,75 @@
     <div class="container">
         <div class="sidebar">
             <h1>📢 Panel Admin</h1>
-            <h2 style="font-size: 16px; color: white; margin-bottom: 20px;">Enviar Notificación</h2>
+            
+            <!-- Sección: Enviar Notificaciones -->
+            <div class="sidebar-section">
+                <h2>📤 Enviar Notificación</h2>
+                <form id="notificationForm">
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input 
+                            type="text" 
+                            id="title" 
+                            placeholder="Ej: ¡Nuevo programa!" 
+                            required
+                        >
+                    </div>
 
-            <form id="notificationForm">
-                <div class="form-group">
-                    <label for="title">Título</label>
-                    <input 
-                        type="text" 
-                        id="title" 
-                        placeholder="Ej: ¡Nuevo programa!" 
-                        required
-                    >
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea 
+                            id="message" 
+                            placeholder="Escribe el mensaje que recibirán los usuarios..." 
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">📤 Enviar Notificación</button>
+                    <div id="status" class="status"></div>
+                </form>
+            </div>
+
+            <!-- Sección: SonicPanel Audio -->
+            <div class="sidebar-section">
+                <h2>🎙️ SonicPanel Audio</h2>
+                <div class="info-card">
+                    <strong>Panel de Administración:</strong>
+                    <a href="https://streaming01.shockmedia.com.ar:2083/" target="_blank">
+                        https://streaming01.shockmedia.com.ar:2083/
+                    </a>
                 </div>
-
-                <div class="form-group">
-                    <label for="message">Mensaje</label>
-                    <textarea 
-                        id="message" 
-                        placeholder="Escribe el mensaje que recibirán los usuarios..." 
-                        required
-                    ></textarea>
+                <div class="info-card">
+                    <strong>Usuario:</strong>
+                    <code>scdj608</code>
                 </div>
+                <div class="info-card">
+                    <strong>Contraseña:</strong>
+                    <code>la701fm</code>
+                </div>
+                <div class="info-card" style="background: rgba(0, 255, 0, 0.1); border-color: #00ff00;">
+                    <strong style="color: #00ff00;">Funciones:</strong>
+                    ✓ Gestionar DJ en vivo<br>
+                    ✓ Configurar AutoDJ<br>
+                    ✓ Ver estadísticas<br>
+                    ✓ Administrar usuarios
+                </div>
+            </div>
 
-                <button type="submit" class="btn">📤 Enviar Notificación</button>
-                <div id="status" class="status"></div>
+            <!-- Sección: Información General -->
+            <div class="sidebar-section">
+                <h2>ℹ️ Información</h2>
+                <div class="info-card">
+                    <strong>Streaming URL:</strong>
+                    <code>https://streaming01.shockmedia.com.ar:8530/stream</code>
+                </div>
+                <div class="info-card">
+                    <strong>App ID OneSignal:</strong>
+                    <code>f6796904-39d7-4aa6-be42-22192ea548a8</code>
+                </div>
+            </div>
 
-                <button type="button" class="btn logout-btn" onclick="logout()">🚪 Cerrar Sesión</button>
-            </form>
-        </div>
+            <button type="button" class="btn logout-btn" onclick="logout()">🚪 Cerrar Sesión</button>
 
         <div class="onesignal-container">
             <iframe src="https://app.onesignal.com/apps/f6796904-39d7-4aa6-be42-22192ea548a8/messages" 

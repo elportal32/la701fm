@@ -13,10 +13,10 @@ https://la701fm.com.ar/admin.html
 ```
 
 ### Credenciales de Acceso (Prueba)
-- **Usuario**: `admin`
-- **Contraseña**: `la701fm`
+- **Usuario**: `LA701FM`
+- **Contraseña**: `LA701FM`
 
-> ⚠️ **IMPORTANTE**: Estas son credenciales de prueba. Antes de entregar al cliente, debes cambiarlas en el archivo `login.html`
+> ⚠️ **IMPORTANTE**: Estas son las credenciales actuales. Puedes cambiarlas en el archivo `login.html` si lo deseas
 
 ---
 
@@ -25,15 +25,15 @@ https://la701fm.com.ar/admin.html
 1. Abre el archivo `login.html`
 2. Busca esta sección en el JavaScript:
 ```javascript
-if (username === 'admin' && password === 'la701fm') {
+if (username === 'LA701FM' && password === 'LA701FM') {
 ```
 
-3. Reemplaza `'admin'` y `'la701fm'` con las credenciales que desees
+3. Reemplaza `'LA701FM'` con las credenciales que desees
 4. También actualiza el cuadro de información en el HTML:
 ```html
-<strong>Credenciales de prueba:</strong><br>
-Usuario: <code>admin</code><br>
-Contraseña: <code>la701fm</code>
+<strong>Credenciales:</strong><br>
+Usuario: <code>LA701FM</code><br>
+Contraseña: <code>LA701FM</code>
 ```
 
 5. Guarda los cambios, haz commit y push a GitHub
@@ -42,7 +42,7 @@ Contraseña: <code>la701fm</code>
 
 ## Funcionalidades del Panel
 
-### 1. Enviar Notificaciones (Lado Izquierdo)
+### 1. Enviar Notificaciones (Sección Superior)
 - **Título**: El encabezado de la notificación
 - **Mensaje**: El contenido que recibirán los usuarios
 - **Botón Enviar**: Envía la notificación a todos los usuarios suscritos
@@ -51,9 +51,21 @@ Contraseña: <code>la701fm</code>
 - Título: `¡Nuevo programa en vivo!`
 - Mensaje: `Sintoniza la701fm ahora para escuchar nuestro nuevo programa`
 
-### 2. Dashboard de OneSignal (Lado Derecho)
+### 2. SonicPanel Audio (Sección Media)
+Acceso directo a la plataforma de streaming:
+- **Panel**: https://streaming01.shockmedia.com.ar:2083/
+- **Usuario**: `scdj608`
+- **Contraseña**: `la701fm`
+
+**Funciones disponibles:**
+- Gestionar DJ en vivo
+- Configurar AutoDJ
+- Ver estadísticas de streaming
+- Administrar usuarios
+
+### 3. Dashboard de OneSignal (Lado Derecho)
 - Acceso completo al panel de OneSignal
-- Puedes ver estadísticas de notificaciones
+- Ver estadísticas de notificaciones
 - Crear campañas más complejas
 - Ver segmentación de usuarios
 - Analizar métricas de engagement
@@ -63,11 +75,13 @@ Contraseña: <code>la701fm</code>
 ## Flujo de Uso
 
 1. **Acceder al panel**: Ve a `admin.html`
-2. **Ingresar credenciales**: Usuario y contraseña
+2. **Ingresar credenciales**: Usuario `LA701FM` y contraseña `LA701FM`
 3. **Escribir notificación**: Completa título y mensaje
 4. **Enviar**: Haz clic en "Enviar Notificación"
 5. **Confirmar**: Verás un mensaje de éxito o error
-6. **Cerrar sesión**: Haz clic en "Cerrar Sesión" cuando termines
+6. **Acceder a SonicPanel**: Haz clic en el enlace para gestionar el streaming
+7. **Ver Dashboard**: El lado derecho muestra OneSignal para estadísticas
+8. **Cerrar sesión**: Haz clic en "Cerrar Sesión" cuando termines
 
 ---
 
